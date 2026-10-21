@@ -1,6 +1,6 @@
-# FinKaya — Aplikasi Pencatat Keuangan Pribadi Modern
+# Mokeep — Aplikasi Pencatat Keuangan Pribadi Modern
 
-**FinKaya** adalah aplikasi web pencatat dan pengelola keuangan pribadi yang lengkap, modern, *production-ready*, aman, dan mudah dikembangkan. Aplikasi ini dibangun dengan standar UI/UX modern ala fintech (Emerald/Fintech aesthetic), mendukung multi-akun, transfer antar rekening, anggaran bulanan, target tabungan, laporan visual interaktif, ekspor/impor data, hingga PWA (*Progressive Web App*).
+**Mokeep** adalah aplikasi web pencatat dan pengelola keuangan pribadi yang lengkap, modern, *production-ready*, aman, dan mudah dikembangkan. Aplikasi ini dibangun dengan standar UI/UX modern ala fintech (Emerald/Fintech aesthetic), mendukung multi-akun, transfer antar rekening, anggaran bulanan, target tabungan, laporan visual interaktif, ekspor/impor data, hingga PWA (*Progressive Web App*).
 
 ---
 
@@ -8,7 +8,7 @@
 
 ### 1. Autentikasi & Akun Pengguna
 - **Pendaftaran & Masuk**: Register akun baru dengan *bootstrap* otomatis kategori & akun dasar.
-- **Login Demo 1-Klik**: Tombol instan untuk mengisi kredensial akun demo (`demo@finkaya.id` / `password123`).
+- **Login Demo 1-Klik**: Tombol instan untuk mengisi kredensial akun demo (`demo@mokeep.id` / `password123`).
 - **Lupa & Setel Ulang Kata Sandi**: Mekanisme reset token aman dengan waktu kedaluwarsa 1 jam.
 - **Manajemen Profil**: Ubah nama, email, foto avatar, kata sandi, dan mata uang default (`IDR`, `USD`, `EUR`, `SGD`, `MYR`).
 - **Keamanan**: Password di-hash menggunakan `bcryptjs` (salt 10 rounds), proteksi sesi JWT terenkripsi NextAuth.
@@ -174,11 +174,11 @@ Isi file `.env` untuk pengujian lokal:
 ```env
 DATABASE_URL="file:./dev.db"
 NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="finkaya-super-secret-key-32-chars-minimum"
+NEXTAUTH_SECRET="mokeep-super-secret-key-32-chars-minimum"
 ```
 
 > **Catatan untuk PostgreSQL (Mode Produksi):**
-> Jika ingin menghubungkan ke database PostgreSQL, ubah provider di `prisma/schema.prisma` menjadi `provider = "postgresql"` dan isi `DATABASE_URL="postgresql://user:pass@localhost:5432/finkaya?schema=public"`.
+> Jika ingin menghubungkan ke database PostgreSQL, ubah provider di `prisma/schema.prisma` menjadi `provider = "postgresql"` dan isi `DATABASE_URL="postgresql://user:pass@localhost:5432/mokeep?schema=public"`.
 
 ### 4. Sinkronisasi Database & Generate Prisma Client
 Jalankan perintah push schema:
@@ -193,7 +193,7 @@ npm run seed
 ```
 
 Hasil kredensial demo:
-- **Email**: `demo@finkaya.id`
+- **Email**: `demo@mokeep.id`
 - **Kata Sandi**: `password123`
 
 ### 6. Jalankan Server Development

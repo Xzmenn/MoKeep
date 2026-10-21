@@ -207,7 +207,7 @@ export default function ReportsPage() {
 
         {/* Printable Title Header */}
         <div className="hidden print-only py-4 border-b">
-          <h2 className="text-2xl font-bold">Laporan Finansial Pribadi - FinKaya</h2>
+          <h2 className="text-2xl font-bold">Laporan Finansial Pribadi - Mokeep</h2>
           <p className="text-xs text-muted-foreground">
             Periode:{" "}
             {summary

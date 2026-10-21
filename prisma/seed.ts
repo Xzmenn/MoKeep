@@ -4,11 +4,16 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("Seeding FinKaya database...");
+  console.log("Seeding Mokeep database...");
 
   // Clean existing demo data
-  const existingUser = await prisma.user.findUnique({
-    where: { email: "demo@finkaya.id" },
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      OR: [
+        { email: "demo@mokeep.id" },
+        { email: "demo@finkaya.id" },
+      ],
+    },
   });
 
   if (existingUser) {
@@ -21,7 +26,7 @@ async function main() {
   const user = await prisma.user.create({
     data: {
       name: "Hayqal Pratama",
-      email: "demo@finkaya.id",
+      email: "demo@mokeep.id",
       password: hashedPassword,
       currency: "IDR",
       setting: {
@@ -515,7 +520,7 @@ async function main() {
   console.log("Seeding finished successfully!");
   console.log("------------------------------------------");
   console.log("Demo Credentials:");
-  console.log("Email    : demo@finkaya.id");
+  console.log("Email    : demo@mokeep.id");
   console.log("Password : password123");
   console.log("------------------------------------------");
 }

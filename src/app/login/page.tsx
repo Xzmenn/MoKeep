@@ -47,7 +47,7 @@ export default function LoginPage() {
   };
 
   const handleFillDemo = () => {
-    setEmail("demo@finkaya.id");
+    setEmail("demo@mokeep.id");
     setPassword("password123");
     toast.info("Akun demo telah diisi!");
   };
@@ -62,7 +62,7 @@ export default function LoginPage() {
               <Sparkles className="h-5 w-5" />
             </div>
             <span className="font-bold text-2xl tracking-tight bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              FinKaya
+              Mokeep
             </span>
           </Link>
           <p className="text-sm text-muted-foreground">

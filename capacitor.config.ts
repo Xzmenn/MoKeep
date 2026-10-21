@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: "com.finkaya.app",
-  appName: "FinKaya",
+  appId: "com.mokeep.app",
+  appName: "Mokeep",
   webDir: "public",
   server: {
     url: "http://192.168.1.19:3000",

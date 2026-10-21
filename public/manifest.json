@@ -1,6 +1,6 @@
 {
-  "name": "FinKaya - Catatan Keuangan Pribadi",
-  "short_name": "FinKaya",
+  "name": "Mokeep - Catatan Keuangan Pribadi",
+  "short_name": "Mokeep",
   "description": "Aplikasi Pencatat Keuangan Pribadi Modern dan Terpercaya",
   "start_url": "/dashboard",
   "display": "standalone",

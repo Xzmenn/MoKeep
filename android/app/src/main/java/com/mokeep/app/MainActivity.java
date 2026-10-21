@@ -1,4 +1,4 @@
-package com.finkaya.app;
+package com.mokeep.app;
 
 import com.getcapacitor.BridgeActivity;
 

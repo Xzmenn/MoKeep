@@ -16,9 +16,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "FinKaya - Aplikasi Pencatat Keuangan Pribadi",
+  title: "Mokeep - Aplikasi Pencatat Keuangan Pribadi",
   description:
-    "Aplikasi web modern pencatat keuangan pribadi: kelola pemasukan, pengeluaran, transfer, budget, target tabungan, dan laporan analisis arus kas.",
+    "Aplikasi web modern pencatat keuangan pribadi: kelola pemasukan, pengeluaran, transfer, budget, target tabungan, dan laporan analisis arus kas bersama Mokeep.",
   manifest: "/manifest.json",
   icons: {
     icon: "/favicon.ico",
@@ -43,7 +43,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="FinKaya" />
+        <meta name="apple-mobile-web-app-title" content="Mokeep" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background font-sans`}

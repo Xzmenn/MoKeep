@@ -68,7 +68,7 @@ export default function RegisterPage() {
               <Sparkles className="h-5 w-5" />
             </div>
             <span className="font-bold text-2xl tracking-tight bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              FinKaya
+              Mokeep
             </span>
           </Link>
           <p className="text-sm text-muted-foreground">
@@ -80,7 +80,7 @@ export default function RegisterPage() {
           <CardHeader className="space-y-1 pb-4">
             <CardTitle className="text-xl">Daftar Akun Baru</CardTitle>
             <CardDescription>
-              Isi formulir berikut untuk membuat akun FinKaya gratis
+              Isi formulir berikut untuk membuat akun Mokeep gratis
             </CardDescription>
           </CardHeader>
           <CardContent>

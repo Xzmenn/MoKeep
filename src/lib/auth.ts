@@ -73,5 +73,5 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET || "finkaya-super-secret-key-32-chars-minimum",
+  secret: process.env.NEXTAUTH_SECRET || "mokeep-super-secret-key-32-chars-minimum",
 };

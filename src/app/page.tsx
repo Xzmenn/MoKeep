@@ -21,7 +21,7 @@ export default async function HomePage() {
             <Sparkles className="h-6 w-6" />
           </div>
           <span className="font-bold text-2xl tracking-tight bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent">
-            FinKaya
+            Mokeep
           </span>
         </div>
         <div className="flex items-center gap-3">
@@ -103,7 +103,7 @@ export default async function HomePage() {
 
       {/* Footer */}
       <footer className="border-t py-6 text-center text-xs text-muted-foreground">
-        © 2026 FinKaya - Dibuat untuk Pengelolaan Finansial Cerdas Indonesia
+        © 2026 Mokeep - Dibuat untuk Pengelolaan Finansial Cerdas Indonesia
       </footer>
     </div>
   );

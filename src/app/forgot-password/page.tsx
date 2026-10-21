@@ -54,7 +54,7 @@ export default function ForgotPasswordPage() {
               <Sparkles className="h-5 w-5" />
             </div>
             <span className="font-bold text-2xl tracking-tight bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              FinKaya
+              Mokeep
             </span>
           </Link>
         </div>

@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
         status: 200,
         headers: {
           "Content-Type": "application/json",
-          "Content-Disposition": `attachment; filename="finkaya_backup_${format(new Date(), "yyyyMMdd_HHmmss")}.json"`,
+          "Content-Disposition": `attachment; filename="mokeep_backup_${format(new Date(), "yyyyMMdd_HHmmss")}.json"`,
         },
       });
     }
@@ -90,7 +90,7 @@ export async function GET(req: NextRequest) {
       status: 200,
       headers: {
         "Content-Type": "text/csv; charset=utf-8",
-        "Content-Disposition": `attachment; filename="transaksi_finkaya_${format(new Date(), "yyyyMMdd")}.csv"`,
+        "Content-Disposition": `attachment; filename="transaksi_mokeep_${format(new Date(), "yyyyMMdd")}.csv"`,
       },
     });
   } catch (error) {

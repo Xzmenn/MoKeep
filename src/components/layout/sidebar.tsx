@@ -47,7 +47,7 @@ export function Sidebar({ className }: { className?: string }) {
         </div>
         <div>
           <span className="font-bold text-lg tracking-tight bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-300 bg-clip-text text-transparent">
-            FinKaya
+            Mokeep
           </span>
           <span className="block text-[10px] text-muted-foreground uppercase tracking-wider font-semibold">
             Pencatat Keuangan
@@ -95,10 +95,10 @@ export function Sidebar({ className }: { className?: string }) {
             </div>
             <div className="overflow-hidden">
               <p className="text-xs font-semibold truncate text-foreground">
-                {session?.user?.name || "Pengguna FinKaya"}
+                {session?.user?.name || "Pengguna Mokeep"}
               </p>
               <p className="text-[11px] text-muted-foreground truncate">
-                {session?.user?.email || "demo@finkaya.id"}
+                {session?.user?.email || "demo@mokeep.id"}
               </p>
             </div>
           </div>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FinKaya - Catatan Keuangan</title>
+  <title>Mokeep - Catatan Keuangan</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
     body {
@@ -64,10 +64,10 @@
       <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
     </svg>
   </div>
-  <h1>FinKaya Mobile</h1>
+  <h1>Mokeep Mobile</h1>
   <p>Menghubungkan ke server aplikasi keuangan...</p>
   <div class="loader"></div>
-  <a href="http://192.168.1.19:3000" class="btn" id="connectBtn">Buka FinKaya</a>
+  <a href="http://192.168.1.19:3000" class="btn" id="connectBtn">Buka Mokeep</a>
   
   <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 280px;">
     <input id="customIp" type="text" value="192.168.1.19:3000" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; text-align: center; font-size: 13px;" />
@@ -75,7 +75,7 @@
   </div>
 
   <div class="footer">
-    Pastikan server lokal FinKaya aktif di komputer Anda<br>
+    Pastikan server lokal Mokeep aktif di komputer Anda<br>
     (port 3000 pada jaringan Wi-Fi yang sama)
   </div>
 
@@ -85,11 +85,11 @@
       if (!ip.startsWith('http')) {
         ip = 'http://' + ip;
       }
-      localStorage.setItem('finkaya_server_ip', ip);
+      localStorage.setItem('mokeep_server_ip', ip);
       window.location.href = ip;
     }
 
-    var savedIp = localStorage.getItem('finkaya_server_ip') || 'http://192.168.1.19:3000';
+    var savedIp = localStorage.getItem('mokeep_server_ip') || 'http://192.168.1.19:3000';
     document.getElementById('connectBtn').href = savedIp;
     
     setTimeout(function() {

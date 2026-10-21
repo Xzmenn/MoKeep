@@ -58,7 +58,7 @@ export function Header({
             <Sparkles className="h-4 w-4" />
           </div>
           <span className="font-bold text-base bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-            FinKaya
+            Mokeep
           </span>
         </div>
       </div>
