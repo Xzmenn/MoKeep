@@ -1,0 +1,233 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String                 @id @default(cuid())
+  name                  String
+  email                 String                 @unique
+  password              String
+  image                 String?
+  currency              String                 @default("IDR")
+  resetToken            String?
+  resetTokenExpiry      DateTime?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+
+  accounts              Account[]
+  categories            Category[]
+  transactions          Transaction[]
+  tags                  Tag[]
+  budgets               Budget[]
+  goals                 Goal[]
+  recurringTransactions RecurringTransaction[]
+  setting               Setting?
+}
+
+model Account {
+  id                    String                 @id @default(cuid())
+  userId                String
+  name                  String
+  type                  String                 // CASH, BANK, EWALLET, CREDIT_CARD, INVESTMENT
+  balance               Float                  @default(0) // Initial balance
+  currentBalance        Float                  @default(0)
+  accountNumber         String?
+  color                 String                 @default("#3b82f6")
+  icon                  String                 @default("Wallet")
+  isArchived            Boolean                @default(false)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+
+  user                  User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions          Transaction[]          @relation("AccountTransactions")
+  transfersReceived     Transaction[]          @relation("TransferToAccount")
+  goals                 Goal[]
+  recurringTransactions RecurringTransaction[] @relation("RecurringAccount")
+  recurringTransfers    RecurringTransaction[] @relation("RecurringToAccount")
+
+  @@index([userId])
+}
+
+model Category {
+  id                    String                 @id @default(cuid())
+  userId                String?                // Null if default system category, or specific user category
+  name                  String
+  type                  String                 // INCOME, EXPENSE, TRANSFER
+  icon                  String                 @default("Tag")
+  color                 String                 @default("#10b981")
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+
+  user                  User?                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subCategories         SubCategory[]
+  transactions          Transaction[]
+  budgets               Budget[]
+  recurringTransactions RecurringTransaction[]
+
+  @@index([userId])
+}
+
+model SubCategory {
+  id           String        @id @default(cuid())
+  categoryId   String
+  name         String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  category     Category      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@index([categoryId])
+}
+
+model Transaction {
+  id                     String                @id @default(cuid())
+  userId                 String
+  type                   String                // INCOME, EXPENSE, TRANSFER
+  amount                 Float
+  date                   DateTime
+  accountId              String
+  toAccountId            String?               // Destination account for TRANSFER
+  categoryId             String?
+  subCategoryId          String?
+  note                   String?
+  attachmentUrl          String?
+  recurringTransactionId String?
+  createdAt              DateTime              @default(now())
+  updatedAt              DateTime              @updatedAt
+
+  user                   User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  account                Account               @relation("AccountTransactions", fields: [accountId], references: [id], onDelete: Cascade)
+  toAccount              Account?              @relation("TransferToAccount", fields: [toAccountId], references: [id], onDelete: SetNull)
+  category               Category?             @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  subCategory            SubCategory?          @relation(fields: [subCategoryId], references: [id], onDelete: SetNull)
+  recurringTransaction   RecurringTransaction? @relation(fields: [recurringTransactionId], references: [id], onDelete: SetNull)
+  tags                   TransactionTag[]
+
+  @@index([userId])
+  @@index([accountId])
+  @@index([date])
+}
+
+model Tag {
+  id           String           @id @default(cuid())
+  userId       String
+  name         String
+  color        String           @default("#64748b")
+  createdAt    DateTime         @default(now())
+
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions TransactionTag[]
+
+  @@unique([userId, name])
+  @@index([userId])
+}
+
+model TransactionTag {
+  transactionId String
+  tagId         String
+
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  tag           Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([transactionId, tagId])
+}
+
+model Budget {
+  id             String   @id @default(cuid())
+  userId         String
+  categoryId     String
+  amount         Float
+  month          Int      // 1 - 12
+  year           Int      // e.g. 2026
+  alertThreshold Float    @default(80) // Percentage
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category       Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, categoryId, month, year])
+  @@index([userId, month, year])
+}
+
+model Goal {
+  id            String             @id @default(cuid())
+  userId        String
+  name          String
+  targetAmount  Float
+  currentAmount Float              @default(0)
+  deadline      DateTime?
+  accountId     String?
+  color         String             @default("#8b5cf6")
+  icon          String             @default("Target")
+  isCompleted   Boolean            @default(false)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  user          User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  account       Account?           @relation(fields: [accountId], references: [id], onDelete: SetNull)
+  contributions GoalContribution[]
+
+  @@index([userId])
+}
+
+model GoalContribution {
+  id        String   @id @default(cuid())
+  goalId    String
+  amount    Float
+  date      DateTime @default(now())
+  note      String?
+  createdAt DateTime @default(now())
+
+  goal      Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
+
+  @@index([goalId])
+}
+
+model RecurringTransaction {
+  id           String        @id @default(cuid())
+  userId       String
+  type         String        // INCOME, EXPENSE, TRANSFER
+  amount       Float
+  accountId    String
+  toAccountId  String?
+  categoryId   String?
+  frequency    String        // DAILY, WEEKLY, MONTHLY, YEARLY
+  startDate    DateTime
+  endDate      DateTime?
+  lastRun      DateTime?
+  nextRun      DateTime
+  note         String?
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  account      Account       @relation("RecurringAccount", fields: [accountId], references: [id], onDelete: Cascade)
+  toAccount    Account?      @relation("RecurringToAccount", fields: [toAccountId], references: [id], onDelete: SetNull)
+  category     Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  transactions Transaction[]
+
+  @@index([userId])
+}
+
+model Setting {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  theme              String   @default("system")
+  language           String   @default("id")
+  currency           String   @default("IDR")
+  dateFormat         String   @default("dd/MM/yyyy")
+  emailNotifications Boolean  @default(true)
+  budgetAlerts       Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
